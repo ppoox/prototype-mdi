@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>prototype-mdi</title>
+    <style type="text/css">
+      @import url(./assets/css/index.css);
+    </style>
+    <script type="module">
+      import menus from './js/data.js'
+      import { init as tabInit, openTab } from './js/tabUtils.js'
+      window.addEventListener('load', () => {
+        document.querySelector('#menu > ul').innerHTML = menus
+          .map((m) => {
+            return `<li name="menuLi" data-menu-no="${m.no}"><a href="#">${m.name}</a></li>`
+          })
+          .join('')
+      })
+      window.addEventListener('load', () => {
+        tabInit()
+        document.querySelectorAll('li[name=menuLi]').forEach((menuLi) => {
+          menuLi.addEventListener('click', function (e) {
+            openTab(menus.find((m) => m.no === Number(this.dataset.menuNo)))
+          })
+        })
+      })
+    </script>
+  </head>
+  <body>
+    <section id="header">
+      <article id="logo" style="height: 160px">
+        <a href="#">
+          <img
+            src="./assets/images/ppoox.png"
+            style="width: 200px; height: 200px"
+          />
+        </a>
+      </article>
+      <article id="info">
+        <p>
+          <a style="text-decoration: underline; cursor: pointer"
+            ><b style="color: #8c52ff">어드민</b>님</a
+          >
+          반갑습니다!
+        </p>
+        <p>
+          <a style="text-decoration: underline; cursor: pointer">로그아웃</a>
+        </p>
+      </article>
+    </section>
+    <section id="container">
+      <article id="menu" style="border: 1px solid #cecece">
+        <p><b>메뉴</b></p>
+        <ul></ul>
+      </article>
+      <article id="content" style="border: 1px solid #cecece">
+        <div id="tabList">
+          <ul>
+            <!-- <li><a>+</a></li> -->
+          </ul>
+          <!-- <span>
+                    새창으로 열기
+                </span> -->
+        </div>
+        <div id="tabFrameList"></div>
+      </article>
+    </section>
+  </body>
+</html>
