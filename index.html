@@ -10,7 +10,11 @@
     </style>
     <script type="module">
       import menus from './js/data.js'
-      import { init as tabInit, openTab } from './js/tabUtils.js'
+      import {
+        init as tabInit,
+        openTab,
+        renewalTabUrl
+      } from './js/tab-utils.js'
       window.addEventListener('load', () => {
         document.querySelector('#menu > ul').innerHTML = menus
           .map((m) => {
@@ -26,6 +30,7 @@
           })
         })
       })
+      window.renewalTabUrl = renewalTabUrl
     </script>
   </head>
   <body>

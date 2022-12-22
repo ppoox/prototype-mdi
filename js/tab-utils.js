@@ -32,17 +32,6 @@ class Iframe {
   }
 }
 
-const init = () => {
-  state.tabs = getTabsFromSessionStorage().map((st) =>
-    Object.assign(new Tab(), st)
-  )
-
-  renderTabs()
-  renderIframes()
-
-  bind()
-}
-
 const bind = () => {
   document.querySelectorAll(state.tabClickSelecotr)?.forEach((tabBtn) => {
     tabBtn.addEventListener('click', function () {
@@ -65,19 +54,6 @@ const bind = () => {
         .join(',')}`
     )
   })
-}
-
-const openTab = (menu) => {
-  const tab = new Tab(menu.no, menu.name, menu.url, false)
-  const isExist = state.tabs.map((t) => t.no).includes(tab.no)
-
-  if (!isExist) {
-    addTab(tab)
-    addIframe(tab.iframe)
-    setTabsAtSessionStorage()
-  }
-
-  clickTab(tab.no)
 }
 
 const clickTab = (no) => {
@@ -150,22 +126,20 @@ const renderTabs = () => {
   }
 
   document.querySelector(state.tabsContainerSelector).innerHTML = html
-
-  // document.querySelector(state.tabsContainerSelector).innerHTML = state.tabs
-  //   .map((t) => createTab(t))
-  //   .join('')
 }
 
 const createIframe = (iframe, opened = false) => {
   return `
         <iframe
           id="tabIframe${iframe.no}"
+          data-iframe-no="${iframe.no}"
           class="${opened ? '' : state.hideClassName}"
           src="${iframe.url}"
           title="${iframe.title}"
           width="${iframe.width}"
           height="${iframe.height}"
           frameBorder=${iframe.border}
+          scrolling="auto"
         ></iframe>
         `
 }
@@ -226,4 +200,39 @@ const getTabsFromSessionStorage = () => {
   return JSON.parse(sessionStorage.getItem(state.tabsSessionStorageKey)) || []
 }
 
-export { init, openTab }
+export const init = () => {
+  state.tabs = getTabsFromSessionStorage().map((st) =>
+    Object.assign(new Tab(), st)
+  )
+
+  renderTabs()
+  renderIframes()
+
+  bind()
+}
+
+export const openTab = (menu) => {
+  const tab = new Tab(menu.no, menu.name, menu.url, false)
+  const isExist = state.tabs.map((t) => t.no).includes(tab.no)
+
+  if (!isExist) {
+    addTab(tab)
+    addIframe(tab.iframe)
+    setTabsAtSessionStorage()
+  }
+
+  clickTab(tab.no)
+}
+
+export const renewalTabUrl = (no, url) => {
+  if (window.top === window) {
+    state.tabs = state.tabs.map((t) => {
+      if (t.no === Number(no)) {
+        t.iframe.url = url
+      }
+      return t
+    })
+
+    setTabsAtSessionStorage()
+  }
+}
