@@ -1,0 +1,41 @@
+body {
+    width: 100%;
+    height: 800px;
+    margin: 0 auto;
+}
+
+ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+a {
+    text-decoration: none;
+    color: #000;
+}
+
+table {
+    width: 100%;
+}
+
+th {
+    background-color: #cecece;
+}
+
+table, th, td {
+    margin: 0 auto;
+    border: 1px solid gray;
+    border-spacing: 0;
+}
+
+td {
+    text-align: center;
+}
+
+.hide {
+    display: none;
+}
+
+.mark {
+    background-color: #d8d8d8;
+}
