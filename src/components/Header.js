@@ -3,7 +3,8 @@ import styled from 'styled-components'
 import { useNavigate } from 'react-router-dom'
 import LogoImage from '../assets/image/ppoox.png'
 import { useDispatch } from 'react-redux'
-import { removeAll } from '../store/tab/tabSlice'
+import { removeAll } from '../store/reducers/tabSlice'
+import BoldText from '../assets/js/bold'
 
 const Wrapper = styled.section`
   height: 80px;
@@ -11,7 +12,7 @@ const Wrapper = styled.section`
   justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid #cecece;
-  padding: 8px 44px;
+  padding: 8px 4vw;
 `
 
 const Logo = styled.article`
@@ -33,12 +34,6 @@ const Info = styled.article`
   }
 `
 
-const Bold = styled.b`
-  text-decoration: underline;
-  color: ${(props) => props.color || '#000'};
-  ${(props) => props.size && `font-size: ${props.size}px;`}
-`
-
 function Header() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
@@ -54,15 +49,18 @@ function Header() {
       <Info>
         <p>
           <a href="/#">
-            <Bold color="#8c52ff">Admin</Bold>님
+            <BoldText color="#8c52ff" decoration="underline">
+              Admin
+            </BoldText>
+            님
           </a>
           &nbsp;반갑습니다!
         </p>
         <p>
           <a href="/#">
-            <Bold color="#cecece" size="14">
+            <BoldText color="#cecece" decoration="underline" size="14">
               로그아웃
-            </Bold>
+            </BoldText>
           </a>
         </p>
       </Info>

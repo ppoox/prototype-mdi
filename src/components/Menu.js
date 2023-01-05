@@ -1,14 +1,10 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components'
-import { add as addTab, mark as markTab } from '../store/tab/tabSlice'
+import { add as addTab, mark as markTab } from '../store/reducers/tabSlice'
+import BoldText from '../assets/js/bold'
 
-const Bold = styled.b`
-  color: ${(props) => props.color || '#000'};
-  ${(props) => props.size && `font-size: ${props.size}px;`}
-`
-
-const Article = styled.article`
+const MenuArticle = styled.article`
   text-align: center;
   width: 12%;
   border: 1px solid #cecece;
@@ -20,14 +16,16 @@ const Article = styled.article`
   }
 `
 
-const Li = styled.li`
+const MenuItem = styled.li`
   padding: 5px 0px;
   margin: 25px 10px;
   border-bottom: 1px solid #cecece;
   cursor: pointer;
   vertical-align: middle;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `
-
 function Menu() {
   const menus = useSelector((state) => state.menu.menus)
   const dispatch = useDispatch()
@@ -39,18 +37,18 @@ function Menu() {
   }
 
   return (
-    <Article>
+    <MenuArticle>
       <p>
-        <Bold size="20">메뉴</Bold>
+        <BoldText size="20">메뉴</BoldText>
       </p>
       <ul>
         {menus.map((menu) => (
-          <Li key={menu.no} onClick={() => onClickMenu(menu.no)}>
+          <MenuItem key={menu.no} onClick={() => onClickMenu(menu.no)}>
             <span>{menu.name}</span>
-          </Li>
+          </MenuItem>
         ))}
       </ul>
-    </Article>
+    </MenuArticle>
   )
 }
 

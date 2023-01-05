@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit'
-import menuSlice from './menu/menuSlice'
-import tabSlice from './tab/tabSlice'
+import menuSlice from './reducers/menuSlice'
+import tabSlice from './reducers/tabSlice'
 
 const store = configureStore({
   reducer: {

@@ -2,8 +2,11 @@ import React, { useEffect, useRef } from 'react'
 import { Outlet, useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 import { useDispatch, useSelector } from 'react-redux'
-import { remove as removeTab, mark as markTab } from '../store/tab/tabSlice'
-const Article = styled.article`
+import {
+  remove as removeTab,
+  mark as markTab
+} from '../store/reducers/tabSlice'
+const ContentArticle = styled.article`
   width: 88%;
   border: 1px solid #cecece;
 `
@@ -35,7 +38,7 @@ const TabContents = styled.div`
   justify-content: center;
   & > div {
     width: 90%;
-    height: 85vw;
+    height: ${(props) => props.height || '100%'};
   }
 `
 
@@ -69,9 +72,7 @@ function Content() {
 
   useEffect(() => {
     const openedTab = tabs.find((t) => t.opened)
-    if (!openedTab) {
-      navigate('/')
-    } else if (prevOpenedTabRef.current !== openedTab) {
+    if (prevOpenedTabRef.current !== openedTab) {
       prevOpenedTabRef.current = openedTab
       navigate(openedTab?.url || '/')
     }
@@ -80,11 +81,9 @@ function Content() {
   const onClickRemove = (tab) => {
     if (tab.opened && tabs.length > 1) {
       const tabIndex = tabs.findIndex((t) => t.no === tab.no)
-      if (tabIndex === tabs.length - 1) {
-        dispatch(markTab(tabs[tabIndex - 1].no))
-      } else {
-        dispatch(markTab(tabs[tabIndex + 1].no))
-      }
+      dispatch(
+        markTab(tabs[tabIndex + (tabIndex === tabs.length - 1 ? -1 : 1)]?.no)
+      )
     }
 
     dispatch(removeTab(tab.no))
@@ -104,7 +103,7 @@ function Content() {
   }
 
   return (
-    <Article>
+    <ContentArticle>
       <TabNames id="tabList ">
         <ul>
           {tabs.slice(0, maxLength).map((tab, index) => (
@@ -128,9 +127,11 @@ function Content() {
         </ul>
       </TabNames>
       <TabContents>
-        <Outlet />
+        <div>
+          <Outlet />
+        </div>
       </TabContents>
-    </Article>
+    </ContentArticle>
   )
 }
 

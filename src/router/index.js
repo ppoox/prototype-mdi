@@ -1,66 +1,27 @@
 import { createBrowserRouter } from 'react-router-dom'
 import App from '../App'
-import Notice from '../pages/notice'
-import NoticeDetail from '../pages/notice/NoticeDetail'
-import Member from '../pages/member'
-import MemberDetail from '../pages/member/MemberDetail'
-import Product from '../pages/product'
-import ProductDetail from '../pages/product/ProductDetail'
-import Delivery from '../pages/delivery'
-import Store from '../pages/store'
-import Display from '../pages/display'
-import Order from '../pages/order'
-import System from '../pages/system'
+import deliveryRouter from './children/delivery'
+import storeRouter from './children/store'
+import noticeRouter from './children/notice'
+import orderRotuer from './children/order'
+import displayRouter from './children/display'
+import systemRouter from './children/system'
+import memberRouter from './children/member'
+import productRouter from './children/product'
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <App />,
     children: [
-      {
-        path: '/notice',
-        element: <Notice />
-      },
-      {
-        path: '/notice/:no',
-        element: <NoticeDetail />
-      },
-      {
-        path: '/member',
-        element: <Member />
-      },
-      {
-        path: '/member/:no',
-        element: <MemberDetail />
-      },
-      {
-        path: '/product',
-        element: <Product />
-      },
-      {
-        path: '/product/:no',
-        element: <ProductDetail />
-      },
-      {
-        path: '/delivery',
-        element: <Delivery />
-      },
-      {
-        path: '/store',
-        element: <Store />
-      },
-      {
-        path: '/display',
-        element: <Display />
-      },
-      {
-        path: '/order',
-        element: <Order />
-      },
-      {
-        path: '/system',
-        element: <System />
-      }
+      ...noticeRouter,
+      ...memberRouter,
+      ...productRouter,
+      ...deliveryRouter,
+      ...storeRouter,
+      ...displayRouter,
+      ...orderRotuer,
+      ...systemRouter
     ]
   }
 ])
