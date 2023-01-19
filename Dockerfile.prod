@@ -1,0 +1,15 @@
+FROM node:18 AS build
+WORKDIR /app/freshway-fs-bo-front
+COPY package.json .
+RUN npm install
+COPY . .
+ARG REACT_APP_NAME
+ENV REACT_APP_NAME=${REACT_APP_NAME}
+RUN echo react app name is ${REACT_APP_ANME}
+ARG REACT_APP_TITLE
+ENV REACT_APP_TITLE=${REACT_APP_TITLE}
+RUN echo react app title is ${REACT_APP_TITLE}
+RUN npm run build-prod
+
+FROM nginx
+COPY --from=build /app/freshway-fs-bo-front/build /usr/share/nginx/html
