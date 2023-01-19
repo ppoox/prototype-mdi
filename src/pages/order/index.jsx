@@ -5,8 +5,6 @@ const H1 = styled.h1`
   height: 800px;
 `
 
-function Order() {
+export default function Order() {
   return <H1>주문관리</H1>
 }
-
-export default Order

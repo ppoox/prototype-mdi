@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-function ProductDetail() {
+export default function ProductDetail() {
   return (
     <div>
       <h1>상품관리 상세</h1>
@@ -9,5 +9,3 @@ function ProductDetail() {
     </div>
   )
 }
-
-export default ProductDetail

@@ -5,8 +5,6 @@ const H1 = styled.h1`
   height: 800px;
 `
 
-function System() {
+export default function System() {
   return <H1>시스템관리</H1>
 }
-
-export default System

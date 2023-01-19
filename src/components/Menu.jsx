@@ -1,8 +1,9 @@
 import React from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useRecoilValue, useSetRecoilState } from 'recoil'
 import styled from 'styled-components'
-import { add as addTab, mark as markTab } from '../store/reducers/tabSlice'
 import BoldText from '../assets/js/bold'
+import { menuState } from '../store/atoms/menu-atom'
+import { tabSelector } from '../store/selectors/tab-selector'
 
 const MenuArticle = styled.article`
   text-align: center;
@@ -26,14 +27,14 @@ const MenuItem = styled.li`
   overflow: hidden;
   text-overflow: ellipsis;
 `
-function Menu() {
-  const menus = useSelector((state) => state.menu.menus)
-  const dispatch = useDispatch()
 
-  const onClickMenu = (menuNo) => {
-    const menu = menus.find((menu) => menu.no === menuNo)
-    dispatch(addTab(menu))
-    dispatch(markTab(menu.no))
+export default function Menu() {
+  const menus = useRecoilValue(menuState)
+  const setAddTab = useSetRecoilState(tabSelector('add'))
+
+  const handleClickMenu = menuNo => {
+    const menu = menus.find(menu => menu.no === menuNo)
+    setAddTab(menu)
   }
 
   return (
@@ -42,8 +43,8 @@ function Menu() {
         <BoldText size="20">메뉴</BoldText>
       </p>
       <ul>
-        {menus.map((menu) => (
-          <MenuItem key={menu.no} onClick={() => onClickMenu(menu.no)}>
+        {menus.map(menu => (
+          <MenuItem key={menu.no} onClick={() => handleClickMenu(menu.no)}>
             <span>{menu.name}</span>
           </MenuItem>
         ))}
@@ -51,5 +52,3 @@ function Menu() {
     </MenuArticle>
   )
 }
-
-export default Menu

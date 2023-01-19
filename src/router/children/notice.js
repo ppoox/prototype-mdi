@@ -4,12 +4,12 @@ import NoticeDetail from '../../pages/notice/NoticeDetail'
 const noticeRouter = [
   {
     path: '/notice',
-    element: <Notice />
+    element: <Notice />,
   },
   {
     path: '/notice/:no',
-    element: <NoticeDetail />
-  }
+    element: <NoticeDetail />,
+  },
 ]
 
 export default noticeRouter

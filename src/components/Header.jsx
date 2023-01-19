@@ -2,9 +2,9 @@ import React from 'react'
 import styled from 'styled-components'
 import { useNavigate } from 'react-router-dom'
 import LogoImage from '../assets/image/ppoox.png'
-import { useDispatch } from 'react-redux'
-import { removeAll } from '../store/reducers/tabSlice'
 import BoldText from '../assets/js/bold'
+import { useResetRecoilState } from 'recoil'
+import { tabSelector } from '../store/selectors/tab-selector'
 
 const Wrapper = styled.section`
   height: 80px;
@@ -34,16 +34,18 @@ const Info = styled.article`
   }
 `
 
-function Header() {
+export default function Header() {
+  const resetTabs = useResetRecoilState(tabSelector('reset'))
   const navigate = useNavigate()
-  const dispatch = useDispatch()
-  const onClickLogo = () => {
+
+  const handleClickLogo = () => {
     navigate('/')
-    dispatch(removeAll())
+    resetTabs()
   }
+
   return (
     <Wrapper>
-      <Logo onClick={onClickLogo}>
+      <Logo onClick={handleClickLogo}>
         <img src={LogoImage} alt="logo" />
       </Logo>
       <Info>
@@ -67,5 +69,3 @@ function Header() {
     </Wrapper>
   )
 }
-
-export default Header

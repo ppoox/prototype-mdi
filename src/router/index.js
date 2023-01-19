@@ -1,5 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom'
 import App from '../App'
+import Error from '../pages/Error'
 import deliveryRouter from './children/delivery'
 import storeRouter from './children/store'
 import noticeRouter from './children/notice'
@@ -21,9 +22,10 @@ const router = createBrowserRouter([
       ...storeRouter,
       ...displayRouter,
       ...orderRotuer,
-      ...systemRouter
-    ]
-  }
+      ...systemRouter,
+    ],
+    errorElement: <Error />,
+  },
 ])
 
 export default router

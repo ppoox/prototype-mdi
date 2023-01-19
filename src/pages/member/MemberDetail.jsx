@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-function MemberDetail() {
+export default function MemberDetail() {
   return (
     <div>
       <h1>회원관리 상세</h1>
@@ -9,5 +9,3 @@ function MemberDetail() {
     </div>
   )
 }
-
-export default MemberDetail

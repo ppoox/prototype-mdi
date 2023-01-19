@@ -1,8 +1,6 @@
 import React from 'react'
 import App from '../App'
 
-function Main() {
+export default function Main() {
   return <App />
 }
-
-export default Main

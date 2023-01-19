@@ -5,8 +5,6 @@ const H1 = styled.h1`
   height: 800px;
 `
 
-function Store() {
-  return <H1>점포관리</H1>
+export default function Store() {
+  return <H1>존재하지 않는 페이지입니다.</H1>
 }
-
-export default Store

@@ -9,7 +9,7 @@ const Wrapper = styled.section`
   justify-content: space-between;
 `
 
-function Container() {
+export default function Container() {
   return (
     <Wrapper>
       <Menu />
@@ -17,5 +17,3 @@ function Container() {
     </Wrapper>
   )
 }
-
-export default Container

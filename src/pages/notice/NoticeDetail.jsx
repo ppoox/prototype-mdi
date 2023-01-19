@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-function NoticeDetail() {
+export default function NoticeDetail() {
   return (
     <div>
       <h1>공지사항 상세</h1>
@@ -9,5 +9,3 @@ function NoticeDetail() {
     </div>
   )
 }
-
-export default NoticeDetail
